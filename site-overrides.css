@@ -1,0 +1,39 @@
+/* Shared visual-system refinements */
+.nav-logo {
+  display: block !important;
+  position: relative !important;
+  width: 106px !important;
+  height: 40px !important;
+  flex: 0 0 106px !important;
+  overflow: hidden !important;
+  background: none !important;
+  font-size: 0 !important;
+  letter-spacing: 0 !important;
+}
+
+.nav-logo img {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  max-width: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+}
+
+body {
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.serif {
+  font-family: 'Newsreader', serif !important;
+}
+
+@media (max-width: 900px) {
+  .nav-logo {
+    width: 92px !important;
+    height: 38px !important;
+    flex-basis: 92px !important;
+  }
+}

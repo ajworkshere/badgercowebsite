@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>BadgerFit — The Product | THE BADGER CO.</title>
+<meta name="description" content="What BadgerFit is, the fit problems it helps you understand, and what's Available Now, Beta or Planned.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://thebadgerco.in/badgerfit.html">
+<meta property="og:title" content="BadgerFit — The Product | THE BADGER CO.">
+<meta property="og:description" content="Understand common shoe-fit problems, scan your foot and check one uncomfortable shoe with BadgerFit.">
+<meta property="og:url" content="https://thebadgerco.in/badgerfit.html">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--blk:#000;--wht:#fff;--rule:rgba(255,255,255,.1);--muted:rgba(255,255,255,.5);--grey:#8A8A8A}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+body{background:var(--blk);color:var(--wht);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.5}
+.serif{font-family:'Playfair Display',serif}
+.mono{font-family:'IBM Plex Mono',monospace}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+a{color:inherit}
+:focus-visible{outline:1.5px solid var(--grey);outline-offset:3px}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.75rem;border-bottom:.5px solid var(--rule);background:rgba(0,0,0,.94);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--wht);text-decoration:none}
+.nav-toggle{display:none;background:transparent;border:.5px solid var(--rule);color:var(--wht);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:.55rem .9rem;cursor:pointer}
+.nav-panel{display:flex;align-items:center;gap:1.75rem}
+.nav-links{display:flex;gap:1.75rem;align-items:center}
+.nav-link{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;position:relative}
+.nav-link.active,.nav-link:hover{color:var(--wht)}
+.nav-cta{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blk);background:var(--wht);padding:.6rem 1.3rem;text-decoration:none;white-space:nowrap}
+.nav-close{display:none}
+@media(max-width:900px){
+  .nav-toggle{display:block}
+  .nav-panel{position:fixed;top:0;left:0;right:0;bottom:0;background:#000;flex-direction:column;justify-content:center;align-items:flex-start;padding:6rem 2rem 2rem;gap:2rem;transform:translateX(100%);transition:transform .3s ease;z-index:200}
+  .nav-panel.open{transform:translateX(0)}
+  .nav-links{flex-direction:column;gap:1.75rem;align-items:flex-start;width:100%}
+  .nav-link{font-size:14px}
+  .nav-cta{width:100%;text-align:center;padding:1.1rem}
+  .nav-close{display:block;position:absolute;top:1.5rem;right:1.75rem;background:none;border:.5px solid var(--rule);color:var(--wht);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:.55rem .9rem;cursor:pointer}
+}
+
+.page-header{padding:9rem 1.75rem 4rem;border-bottom:.5px solid var(--rule)}
+.page-title{font-family:'Playfair Display',serif;font-size:clamp(34px,5.5vw,64px);font-weight:900;line-height:1.02;margin:1rem 0 1.5rem}
+.page-sub{font-size:13px;color:var(--muted);max-width:560px;line-height:1.9}
+.sec{padding:4rem 1.75rem;border-bottom:.5px solid var(--rule)}
+.sec-hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2.5rem;gap:1rem;flex-wrap:wrap}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,34px);font-weight:900;max-width:600px}
+.sec-n{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.25);letter-spacing:.3em}
+.body-copy{font-size:13px;color:var(--muted);line-height:2}
+.status-pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;border:.5px solid var(--rule);padding:.3rem .7rem;color:rgba(255,255,255,.5)}
+.status-pill.available{border-color:rgba(255,255,255,.3);color:var(--wht)}
+.status-pill.beta{border-color:rgba(138,138,138,.4);color:var(--grey)}
+.status-pill.planned{border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.35)}
+.btn{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;padding:1rem 2rem;text-decoration:none;border:.5px solid var(--wht);color:var(--wht);background:transparent}
+.btn:hover{background:var(--wht);color:var(--blk)}
+.disclaimer{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.32);letter-spacing:.08em;line-height:1.8}
+
+.feat-list{border:.5px solid var(--rule)}
+.feat-row{display:grid;grid-template-columns:1fr 140px;border-bottom:.5px solid var(--rule)}
+.feat-row:last-child{border-bottom:none}
+.feat-name{padding:1.1rem 1.5rem;font-family:'Playfair Display',serif;font-size:14px;border-right:.5px solid var(--rule)}
+.feat-status{padding:1.1rem 1.5rem;display:flex;align-items:center}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;border:.5px solid var(--rule)}
+.col{padding:2rem;border-right:.5px solid var(--rule)}
+.col:last-child{border-right:none}
+.col-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:1rem}
+
+.faq{border:.5px solid var(--rule)}
+.faq-row{padding:1.5rem;border-bottom:.5px solid var(--rule)}
+.faq-row:last-child{border-bottom:none}
+.faq-q{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;margin-bottom:.6rem}
+.faq-a{font-size:12px;color:var(--muted);line-height:1.9}
+
+footer{padding:2rem 1.75rem;display:flex;justify-content:space-between;align-items:center;border-top:.5px solid var(--rule);flex-wrap:wrap;gap:1rem}
+.ft-logo{font-family:'Playfair Display',serif;font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--muted)}
+.ft-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.ft-link{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none}
+.ft-copy{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.2)}
+
+@media(max-width:900px){.two-col{grid-template-columns:1fr}.col{border-right:none;border-bottom:.5px solid var(--rule)}.col:last-child{border-bottom:none}.feat-row{grid-template-columns:1fr}.feat-name{border-right:none;border-bottom:.5px solid var(--rule)}}
+
+/* Accessibility refinements */
+.nav-toggle,.nav-close{min-width:44px;min-height:44px}
+.tag,.sec-n,.disclaimer,.ft-link,.ft-copy,.status-pill.planned,.cat-status,.pf-note,.pf-tag,.way-label,.hero-trust,.fn,.journal-label,.priv-val,.aud-body,.guide-body,.future-chip,.check-label,.flow-arrow,.h-arrow,.val-body{color:rgba(255,255,255,.62)}
+@media(max-width:900px){.nav-panel{visibility:hidden}.nav-panel.open{visibility:visible}.nav-link{min-height:44px;display:flex;align-items:center}.ft-link{min-height:44px;display:inline-flex;align-items:center}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
+/* Premium floating navigation and generous rhythm */
+.sec{padding:6.5rem clamp(1.5rem,6vw,6rem)}
+.sec>*{max-width:1200px;margin-left:auto;margin-right:auto}
+.page-header{padding-left:clamp(1.5rem,6vw,6rem);padding-right:clamp(1.5rem,6vw,6rem)}
+@media(min-width:901px){nav{top:1rem;left:clamp(1rem,3vw,2.5rem);right:clamp(1rem,3vw,2.5rem);max-width:1280px;margin:0 auto;padding:.78rem .85rem .78rem 1.35rem;border:1px solid rgba(255,255,255,.13);border-radius:999px;background:rgba(10,10,10,.84);box-shadow:0 16px 48px rgba(0,0,0,.28)}.nav-link{letter-spacing:.12em}.nav-cta{padding:.78rem 1.35rem;border-radius:999px}}
+@media(max-width:900px){nav{top:.75rem;left:.75rem;right:.75rem;padding:.7rem 1rem;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:rgba(10,10,10,.92)}.nav-panel{border-radius:0}.sec{padding:5rem 1.5rem}}
+/* Official BadgerFit logo */
+.nav-logo{display:block;width:80px;height:38px;flex:0 0 80px;background:url("apple-touch-icon.png") center/135px 135px no-repeat;font-size:0!important;letter-spacing:0!important;overflow:hidden}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo serif" aria-label="BadgerFit home">BadgerFit</a>
+  <button id="navToggle" class="nav-toggle mono" aria-expanded="false" aria-controls="navPanel" aria-label="Open navigation menu">Menu</button>
+  <div id="navPanel" class="nav-panel">
+    <button id="navClose" class="nav-close mono" aria-label="Close navigation menu">Close ✕</button>
+    <div class="nav-links">
+      <a href="badgerfit.html" class="nav-link active mono">BadgerFit</a>
+      <a href="fit-check.html" class="nav-link mono">Fit Check</a>
+      <a href="how-it-works.html" class="nav-link mono">How It Works</a>
+      <a href="learn.html" class="nav-link mono">Learn</a>
+      <a href="research.html" class="nav-link mono">Research</a>
+      <a href="about.html" class="nav-link mono">About</a>
+    </div>
+    <a href="https://badger-eight.vercel.app/" class="nav-cta mono">Open BadgerFit</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="tag" style="margin-bottom:1rem">The Product</div>
+  <h1 class="page-title serif">BadgerFit.</h1>
+  <p class="page-sub">A foot-scanning and shoe fit-check tool that helps you understand your feet and make more informed footwear decisions.</p>
+</header>
+
+<section class="sec">
+  <div class="sec-hd"><div><div class="tag" style="margin-bottom:.6rem">Common Fit Problems</div><h2 class="sec-title serif">Built for people dealing with recurring footwear discomfort.</h2></div><div class="sec-n mono">01</div></div>
+  <p class="body-copy" style="max-width:600px">Toe pressure, heel slipping, side pressure, end-of-day foot fatigue, discomfort after activity, inconsistent sizing and uncertainty about width, cushioning or insoles.</p>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div><div class="tag" style="margin-bottom:.6rem">Two Entry Points</div><h2 class="sec-title serif">Scan versus Fit Check.</h2></div><div class="sec-n mono">02</div></div>
+  <div class="two-col">
+    <div class="col"><div class="col-title serif">Foot Scan</div><p class="body-copy">A guided, A4-referenced top-view scan producing estimated measurements and sizing guidance. Requires paper, camera and account.</p></div>
+    <div class="col"><div class="col-title serif">Fit Check</div><p class="body-copy">A question-based assessment of one specific uncomfortable shoe. No scan or paper required. Account required.</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div><div class="tag" style="margin-bottom:.6rem">Scan Requirements</div><h2 class="sec-title serif">What you'll need.</h2></div><div class="sec-n mono">03</div></div>
+  <p class="body-copy">One sheet of A4 paper, a phone camera, adequate lighting, and a BadgerFit account. The camera-guidance process runs a live checklist for paper visibility, foot placement, lighting and steadiness before capture.</p>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div><div class="tag" style="margin-bottom:.6rem">Results</div><h2 class="sec-title serif">What you get back.</h2></div><div class="sec-n mono">04</div></div>
+  <p class="body-copy" style="max-width:600px;margin-bottom:1.5rem">Estimated foot length and width, a footprint-based arch estimate, a suggested UK/India shoe size, an insert-size category, and a beta Badger Cluster grouping. Plus rule-based comfort recommendations and, if you skip the scan, Quick Relief/Fit Check guidance without either.</p>
+  <a href="index.html#profile" class="btn mono">See a Sample Profile</a>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div><div class="tag" style="margin-bottom:.6rem">Everything in the App</div><h2 class="sec-title serif">Feature status.</h2></div><div class="sec-n mono">05</div></div>
+  <div class="feat-list">
+    <div class="feat-row"><div class="feat-name serif">User authentication</div><div class="feat-status"><span class="status-pill available mono">Available Now</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Guided top-view foot scan (A4 reference)</div><div class="feat-status"><span class="status-pill available mono">Available Now</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Scan-preparation tutorial &amp; live camera checklist</div><div class="feat-status"><span class="status-pill available mono">Available Now</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Live camera-checklist thresholds</div><div class="feat-status"><span class="status-pill beta mono">Beta</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Classical CV measurement workflow</div><div class="feat-status"><span class="status-pill available mono">Available Now</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Estimated length and width outputs</div><div class="feat-status"><span class="status-pill beta mono">Beta</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Footprint-based arch estimate</div><div class="feat-status"><span class="status-pill beta mono">Beta</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Suggested UK/India shoe size</div><div class="feat-status"><span class="status-pill beta mono">Beta</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Width and insert-size categories</div><div class="feat-status"><span class="status-pill beta mono">Beta</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Badger Cluster grouping</div><div class="feat-status"><span class="status-pill beta mono">Beta</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Short context assessment (standing hours, discomfort, diabetes flag)</div><div class="feat-status"><span class="status-pill available mono">Available Now</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Rule-based comfort recommendations</div><div class="feat-status"><span class="status-pill available mono">Available Now</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Quick Relief / Fit Check (no scan)</div><div class="feat-status"><span class="status-pill available mono">Available Now</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Safety escalation for warning signs</div><div class="feat-status"><span class="status-pill available mono">Available Now</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Scan history &amp; saved fit profile</div><div class="feat-status"><span class="status-pill available mono">Available Now</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Profile, permission &amp; data controls</div><div class="feat-status"><span class="status-pill available mono">Available Now</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Educational articles &amp; foot-care content</div><div class="feat-status"><span class="status-pill available mono">Available Now</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Store/cart interface &amp; affiliate links</div><div class="feat-status"><span class="status-pill available mono">Available Now</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Scan-confidence output (not a validated accuracy percentage)</div><div class="feat-status"><span class="status-pill beta mono">Beta</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Seven-day foot journal</div><div class="feat-status"><span class="status-pill planned mono">Planned</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Weekly comfort summaries</div><div class="feat-status"><span class="status-pill planned mono">Planned</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Longitudinal footwear comparisons</div><div class="feat-status"><span class="status-pill planned mono">Planned</span></div></div>
+    <div class="feat-row"><div class="feat-name serif">Validated research cohorts</div><div class="feat-status"><span class="status-pill planned mono">Planned</span></div></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div><div class="tag" style="margin-bottom:.6rem">Current Limitations</div><h2 class="sec-title serif">What this is not.</h2></div><div class="sec-n mono">06</div></div>
+  <p class="body-copy" style="max-width:600px">The scan is not a 3D scan, a medical scan, a gait assessment or a pressure assessment. It does not diagnose injuries and does not directly measure foot volume, instep girth or heel width. It uses classical computer vision, not 3D landmark detection. Fit Check is deterministic and rule-based — not an AI chatbot, and not a medical diagnosis.</p>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div><div class="tag" style="margin-bottom:.6rem">FAQs</div><h2 class="sec-title serif">Common questions.</h2></div><div class="sec-n mono">07</div></div>
+  <div class="faq">
+    <div class="faq-row"><div class="faq-q serif">Do I need an account?</div><div class="faq-a mono">Yes, both the foot scan and Fit Check currently require you to sign in.</div></div>
+    <div class="faq-row"><div class="faq-q serif">Is this a medical device?</div><div class="faq-a mono">No. BadgerFit provides educational fit guidance, not a medical diagnosis.</div></div>
+    <div class="faq-row"><div class="faq-q serif">What is a Badger Cluster?</div><div class="faq-a mono">A beta grouping based on available width and arch information. Its boundaries are still being evaluated — it is not yet a validated manufacturing standard.</div></div>
+    <div class="faq-row"><div class="faq-q serif">Will this lead to Badger footwear?</div><div class="faq-a mono">That's the long-term direction, but it depends on validated data and evidence. Nothing is available for sale today.</div></div>
+  </div>
+</section>
+
+<section class="sec" style="text-align:center;border-bottom:none">
+  <a href="https://badger-eight.vercel.app/" class="btn mono">Open BadgerFit</a>
+  <p class="disclaimer" style="margin-top:1.25rem">Results are estimates and educational guidance, not medical advice.</p>
+</section>
+
+<footer>
+  <div class="ft-logo serif">The Badger Co.</div>
+  <div class="ft-links">
+    <a href="index.html" class="ft-link mono">Home</a>
+    <a href="fit-check.html" class="ft-link mono">Fit Check</a>
+    <a href="how-it-works.html" class="ft-link mono">How It Works</a>
+    <a href="learn.html" class="ft-link mono">Learn</a>
+    <a href="blogs.html" class="ft-link mono">Blogs</a>
+    <a href="research.html" class="ft-link mono">Research</a>
+    <a href="about.html" class="ft-link mono">About</a>
+  </div>
+  <div class="ft-copy mono">© 2026 The Badger Co.</div>
+</footer>
+
+<script>
+var toggle=document.getElementById('navToggle'),panel=document.getElementById('navPanel'),closeBtn=document.getElementById('navClose');
+function openMenu(){panel.classList.add('open');toggle.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';closeBtn.focus();}
+function closeMenu(){panel.classList.remove('open');toggle.setAttribute('aria-expanded','false');document.body.style.overflow='';toggle.focus();}
+toggle.addEventListener('click',function(){panel.classList.contains('open')?closeMenu():openMenu();});
+closeBtn.addEventListener('click',closeMenu);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('open'))closeMenu();});
+panel.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+document.addEventListener("keydown",function(e){if(e.key!=="Tab"||!panel.classList.contains("open"))return;var items=Array.from(panel.querySelectorAll("a,button")).filter(function(el){return el.getClientRects().length>0});if(!items.length)return;var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}});
+</script>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>BadgerFit by The Badger Co. — Understand Your Feet. Choose Better For Them.</title>
+<meta name="description" content="BadgerFit helps you scan your foot, check an uncomfortable shoe, and get practical, rule-based fit guidance.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://thebadgerco.in/">
+<meta property="og:title" content="BadgerFit by The Badger Co. — Understand Your Feet. Choose Better For Them.">
+<meta property="og:description" content="Scan your foot, check an uncomfortable shoe and receive practical fit guidance — all from your phone.">
+<meta property="og:url" content="https://thebadgerco.in/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"BadgerFit",
+  "applicationCategory":"LifestyleApplication",
+  "operatingSystem":"Web",
+  "url":"https://badger-eight.vercel.app/",
+  "description":"A foot-scanning and shoe fit-check tool that provides estimated measurements and educational footwear guidance.",
+  "publisher":{"@type":"Organization","name":"The Badger Co.","url":"https://thebadgerco.in/"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"What is BadgerFit?","acceptedAnswer":{"@type":"Answer","text":"BadgerFit is a foot-scan and shoe Fit Check tool that turns estimated measurements or shoe-specific answers into practical, rule-based footwear guidance."}},
+    {"@type":"Question","name":"Should I scan or use Fit Check?","acceptedAnswer":{"@type":"Answer","text":"Scan to build an estimated foot profile. Use Fit Check when one particular shoe feels uncomfortable and you want a focused plan."}},
+    {"@type":"Question","name":"What do I need for the BadgerFit scan?","acceptedAnswer":{"@type":"Answer","text":"You need one A4 sheet, a phone camera, suitable lighting and a BadgerFit account."}},
+    {"@type":"Question","name":"Is BadgerFit medical advice?","acceptedAnswer":{"@type":"Answer","text":"No. BadgerFit provides educational fit and footwear guidance, not medical advice or diagnosis."}}
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--blk:#000;--wht:#fff;--rule:rgba(255,255,255,.1);--muted:rgba(255,255,255,.5);--dim:rgba(255,255,255,.2);--grey:#8A8A8A}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+body{background:var(--blk);color:var(--wht);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.5}
+.serif{font-family:'Playfair Display',serif}
+.mono{font-family:'IBM Plex Mono',monospace}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+a{color:inherit}
+:focus-visible{outline:1.5px solid var(--grey);outline-offset:3px}
+img,svg{max-width:100%}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.75rem;border-bottom:.5px solid var(--rule);background:rgba(0,0,0,.94);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--wht);text-decoration:none;flex-shrink:0}
+.nav-toggle{display:none;background:transparent;border:.5px solid var(--rule);color:var(--wht);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:.55rem .9rem;cursor:pointer}
+.nav-panel{display:flex;align-items:center;gap:1.75rem}
+.nav-links{display:flex;gap:1.75rem;align-items:center}
+.nav-link{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;position:relative;transition:color .2s}
+.nav-link:hover{color:var(--wht)}
+.nav-link::after{content:'';position:absolute;width:0;height:.5px;bottom:-3px;left:0;background:var(--wht);transition:width .3s}
+.nav-link:hover::after{width:100%}
+.nav-cta{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blk);background:var(--wht);padding:.6rem 1.3rem;text-decoration:none;transition:background .2s,color .2s;white-space:nowrap}
+.nav-cta:hover{background:transparent;color:var(--wht);outline:.5px solid var(--wht)}
+.nav-close{display:none}
+@media(max-width:900px){
+  .nav-toggle{display:block}
+  .nav-panel{position:fixed;top:0;left:0;right:0;bottom:0;background:#000;flex-direction:column;justify-content:center;align-items:flex-start;padding:6rem 2rem 2rem;gap:2rem;transform:translateX(100%);transition:transform .3s ease;z-index:200}
+  .nav-panel.open{transform:translateX(0)}
+  .nav-links{flex-direction:column;gap:1.75rem;align-items:flex-start;width:100%}
+  .nav-link{font-size:14px}
+  .nav-cta{width:100%;text-align:center;padding:1.1rem}
+  .nav-close{display:block;position:absolute;top:1.5rem;right:1.75rem;background:none;border:.5px solid var(--rule);color:var(--wht);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;padding:.55rem .9rem;cursor:pointer}
+}
+
+/* SHARED */
+body{padding-top:0}
+.sec{padding:5rem 1.75rem;border-bottom:.5px solid var(--rule)}
+.sec-hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3rem;gap:1rem;flex-wrap:wrap}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(24px,3.6vw,42px);font-weight:900;line-height:1.05;max-width:640px}
+.sec-n{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.25);letter-spacing:.3em;white-space:nowrap}
+.body-copy{font-size:13px;color:var(--muted);line-height:2}
+.status-pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;border:.5px solid var(--rule);padding:.3rem .7rem;color:rgba(255,255,255,.5)}
+.status-pill.beta{border-color:rgba(138,138,138,.4);color:var(--grey)}
+.status-pill.planned{border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.35)}
+.btn{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;padding:1rem 2rem;text-decoration:none;transition:background .2s,color .2s;border:.5px solid var(--wht);color:var(--wht);cursor:pointer;background:transparent}
+.btn:hover{background:var(--wht);color:var(--blk)}
+.btn.ghost{border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.7)}
+.btn.ghost:hover{border-color:var(--wht);color:var(--wht);background:transparent}
+.disclaimer{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.32);letter-spacing:.08em;line-height:1.8}
+
+/* HERO */
+.hero{padding:11rem clamp(1.5rem,6vw,6rem) 8rem;border-bottom:.5px solid var(--rule);min-height:92vh;display:flex;align-items:center}
+.hero-inner{width:100%;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:clamp(3rem,8vw,8rem);align-items:center}
+.hero-copy{max-width:720px}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,64px);font-weight:900;line-height:1.03;letter-spacing:-.01em;margin:1.25rem 0 1.5rem}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.6);line-height:1.9;max-width:560px;margin-bottom:2rem}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+.hero-trust{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.1em;margin-bottom:1rem;line-height:1.8}
+.hero-note{opacity:.72}
+.hero-status{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem}
+
+/* APP VISUALS */
+.phone-stage{position:relative;min-height:530px;display:flex;align-items:center;justify-content:center}
+.phone-stage::before{content:'';position:absolute;width:410px;height:410px;border-radius:50%;background:radial-gradient(circle,rgba(138,138,138,.2),rgba(138,138,138,0) 68%);filter:blur(8px)}
+.phone{position:relative;width:270px;min-height:520px;border:1px solid rgba(255,255,255,.22);border-radius:38px;background:#0c0c0c;padding:14px;box-shadow:0 35px 90px rgba(0,0,0,.65),inset 0 0 0 1px rgba(255,255,255,.04);transform:rotate(3deg);z-index:2}
+.phone::before{content:'';display:block;width:76px;height:5px;border-radius:10px;background:rgba(255,255,255,.16);margin:2px auto 18px}
+.screen{min-height:468px;border-radius:27px;background:linear-gradient(160deg,#181818,#080808);padding:24px 18px;overflow:hidden}
+.screen-kicker{font:500 9px/1.4 'IBM Plex Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
+.screen-title{font:700 25px/1.05 'Playfair Display',serif;margin:10px 0 22px}
+.scan-frame{height:200px;border:1px solid rgba(255,255,255,.18);border-radius:18px;display:grid;place-items:center;position:relative;background:rgba(255,255,255,.02)}
+.scan-frame::before{content:'';position:absolute;inset:50% 12px auto;height:1px;background:linear-gradient(90deg,transparent,var(--grey),transparent);box-shadow:0 0 16px var(--grey)}
+.foot-outline{width:74px;height:160px;border:1px solid rgba(255,255,255,.55);border-radius:48% 52% 35% 35% / 35% 35% 65% 65%;transform:rotate(-4deg);position:relative}
+.foot-outline::before{content:'';position:absolute;width:16px;height:21px;border:1px solid rgba(255,255,255,.5);border-radius:50%;top:-26px;left:2px;box-shadow:18px -6px 0 -1px #0f0f0f,18px -6px 0 0 rgba(255,255,255,.45),36px -4px 0 -2px #0f0f0f,36px -4px 0 -1px rgba(255,255,255,.4),51px 4px 0 -3px #0f0f0f,51px 4px 0 -2px rgba(255,255,255,.35)}
+.screen-checks{display:grid;gap:8px;margin-top:18px}
+.screen-check{display:flex;justify-content:space-between;font:400 9px/1.4 'IBM Plex Mono',monospace;color:rgba(255,255,255,.52)}
+.screen-check b{font-weight:400;color:#b5b5b5}
+.float-card{position:absolute;z-index:3;background:rgba(22,22,22,.93);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:18px;box-shadow:0 20px 50px rgba(0,0,0,.45);backdrop-filter:blur(12px)}
+.float-card.top{top:54px;right:-10px;width:190px}.float-card.bottom{bottom:48px;left:-12px;width:205px}
+.float-label{font:500 8px/1.4 'IBM Plex Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:8px}
+.float-value{font:700 18px/1.2 'Playfair Display',serif}.float-note{font:400 9px/1.6 'IBM Plex Mono',monospace;color:rgba(255,255,255,.48);margin-top:6px}
+.pain-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:clamp(2rem,6vw,6rem);align-items:center}
+.foot-map{min-height:420px;display:grid;place-items:center;border-radius:28px;background:radial-gradient(circle at center,rgba(138,138,138,.09),transparent 68%);position:relative}
+.foot-map svg{width:min(260px,80%);height:auto;overflow:visible}.pain-dot{fill:var(--grey)}.pain-line{stroke:rgba(255,255,255,.25);stroke-width:1}.pain-text{fill:rgba(255,255,255,.7);font:9px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+.app-story{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(3rem,8vw,8rem);align-items:center}
+.app-screens{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.mini-screen{border:1px solid var(--rule);border-radius:26px;background:linear-gradient(145deg,#171717,#090909);padding:22px;min-height:360px;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+.mini-screen:nth-child(2){margin-top:54px}.mini-screen h3{font:700 22px/1.1 'Playfair Display',serif;margin:12px 0 24px}.metric{padding:14px 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;gap:1rem;font:400 9px/1.5 'IBM Plex Mono',monospace;color:rgba(255,255,255,.48)}.metric strong{color:#fff;font-weight:400}.fit-plan{padding:14px;border:1px solid var(--rule);border-radius:14px;margin-top:10px}.fit-plan b{display:block;font:500 9px/1.4 'IBM Plex Mono',monospace;color:var(--grey);text-transform:uppercase;letter-spacing:.12em;margin-bottom:7px}.fit-plan p{font-size:11px;color:var(--muted);line-height:1.6}
+.story-list{display:grid;gap:1.25rem;margin-top:2rem}.story-item{display:grid;grid-template-columns:34px 1fr;gap:1rem;align-items:start}.story-num{width:30px;height:30px;border:1px solid rgba(138,138,138,.5);border-radius:50%;display:grid;place-items:center;font:9px 'IBM Plex Mono',monospace;color:var(--grey)}.story-item h3{font:700 15px/1.2 'Playfair Display',serif;margin-bottom:.35rem}.story-item p{font-size:11px;color:var(--muted);line-height:1.7}
+.evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--rule)}
+.evidence-card{padding:2rem;border-right:.5px solid var(--rule);min-height:220px;display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem}
+.evidence-card:last-child{border-right:none}.evidence-number{font:italic 400 clamp(38px,5vw,66px)/1 'Playfair Display',serif;color:var(--grey)}
+.evidence-card p{font-size:12px;line-height:1.8;color:rgba(255,255,255,.68)}.evidence-source{font:400 9px/1.7 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+.evidence-source a{text-underline-offset:3px}.evidence-note{margin-top:1.25rem;max-width:760px}
+.faq-shell{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(3rem,8vw,8rem);align-items:start}.faq-intro{position:sticky;top:8rem}.faq-intro p{max-width:360px;margin-top:1.25rem}
+.blog-grid{display:grid;grid-template-columns:1.2fr .9fr .9fr;gap:1rem}.blog-card{min-height:330px;border:1px solid var(--rule);border-radius:24px;padding:1.75rem;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;overflow:hidden;position:relative;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.01))}.blog-card:first-child{min-height:420px}.blog-art{height:150px;border-radius:18px;background:radial-gradient(circle at 30% 40%,rgba(138,138,138,.3),transparent 28%),linear-gradient(120deg,#262626,#0d0d0d);position:relative;overflow:hidden;margin-bottom:1.5rem}.blog-art::before,.blog-art::after{content:'';position:absolute;border:1px solid rgba(255,255,255,.22);border-radius:50%}.blog-art::before{width:120px;height:120px;right:-20px;top:18px}.blog-art::after{width:70px;height:70px;right:35px;top:55px}.blog-type{font:500 9px/1.4 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}.blog-card h3{font:700 clamp(18px,2vw,28px)/1.15 'Playfair Display',serif;margin:.7rem 0}.blog-card p{font-size:11px;color:var(--muted);line-height:1.7}.blog-link{font:500 9px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;margin-top:1.5rem}
+
+/* GRIDS */
+.two-way-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:.5px solid var(--rule)}
+.way-card{padding:2.25rem;display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem}
+.way-card+.way-card{border-left:.5px solid var(--rule)}
+.way-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:900}
+.way-body{font-size:12px;color:var(--muted);line-height:1.9}
+.way-labels{display:flex;gap:.5rem;flex-wrap:wrap}
+.way-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.32);border:.5px solid var(--rule);padding:.3rem .6rem}
+
+.audience-grid{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--rule)}
+.aud-card{padding:2rem;border-right:.5px solid var(--rule);border-bottom:.5px solid var(--rule)}
+.aud-card:nth-child(3){border-right:none}
+.aud-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:1rem}
+.aud-body{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:rgba(255,255,255,.42);line-height:1.9}
+
+.problem-grid{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--rule)}
+.prob-cell{padding:1.5rem;border-right:.5px solid var(--rule);border-bottom:.5px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;color:rgba(255,255,255,.5)}
+
+.flow{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--rule)}
+.process-flow{grid-template-columns:repeat(3,1fr)}
+.fc{padding:1.75rem 1.5rem;border-right:.5px solid var(--rule);border-bottom:.5px solid var(--rule)}
+.fn{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.25);letter-spacing:.25em;margin-bottom:1rem}
+.ft2{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:.6rem}
+.fs{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);line-height:1.8}
+
+.profile-card{border:.5px solid var(--rule)}
+.profile-hd{padding:1.25rem 1.75rem;border-bottom:.5px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr}
+.pf-row{padding:1rem 1.75rem;border-bottom:.5px solid rgba(255,255,255,.07);border-right:.5px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
+.pf-key{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase}
+.pf-val{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--wht);text-align:right}
+.pf-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.08em;display:block;margin-top:.15rem}
+
+.check-list{display:flex;flex-direction:column;border:.5px solid var(--rule)}
+.check-row{display:grid;grid-template-columns:160px 1fr;border-bottom:.5px solid var(--rule)}
+.check-row:last-child{border-bottom:none}
+.check-label{padding:1rem 1.5rem;border-right:.5px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.check-val{padding:1rem 1.5rem;font-size:11px;color:rgba(255,255,255,.6)}
+
+.guide-grid{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--rule)}
+.guide-cell{padding:1.5rem;border-right:.5px solid var(--rule);border-bottom:.5px solid var(--rule)}
+.guide-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;margin-bottom:.5rem}
+.guide-body{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);line-height:1.7}
+
+.journal-two{display:grid;grid-template-columns:1fr 1fr;border:.5px solid var(--rule)}
+.journal-col{padding:2rem;border-right:.5px solid var(--rule);border-bottom:.5px solid var(--rule)}
+.journal-label{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.25em;text-transform:uppercase;margin-bottom:1rem}
+.journal-item{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.5);padding:.6rem 0;border-bottom:.5px solid rgba(255,255,255,.06)}
+.journal-item:last-child{border-bottom:none}
+
+.learn-grid{display:grid;grid-template-columns:repeat(4,1fr);border:.5px solid var(--rule)}
+.learn-cell{padding:1.5rem;border-right:.5px solid var(--rule);border-bottom:.5px solid var(--rule)}
+.learn-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;line-height:1.4}
+
+/* FAQ */
+.faq-list{border-top:.5px solid var(--rule)}
+.faq-item{border-bottom:.5px solid var(--rule)}
+.faq-item:last-child{border-bottom:none}
+.faq-item summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.6rem 0;cursor:pointer;font-family:'Playfair Display',serif;font-size:clamp(15px,1.5vw,19px);font-weight:700}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';font-family:'IBM Plex Mono',monospace;color:var(--grey);font-weight:400}
+.faq-item[open] summary::after{content:'–'}
+.faq-answer{max-width:700px;padding:0 3rem 1.6rem 0;font-size:12px;color:var(--muted);line-height:1.9}
+
+.priv-ledger{border:.5px solid var(--rule)}
+.priv-row{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;border-bottom:.5px solid var(--rule);gap:1rem;flex-wrap:wrap}
+.priv-row:last-child{border-bottom:none}
+.priv-key{font-family:'Playfair Display',serif;font-size:13px}
+.priv-val{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.08em;text-align:right}
+
+.future-block{padding:3.5rem 1.75rem;border-bottom:.5px solid var(--rule);background:rgba(255,255,255,.015)}
+.future-inner{max-width:640px}
+.future-list{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.future-chip{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;border:.5px solid var(--rule);padding:.4rem .8rem;color:rgba(255,255,255,.4)}
+
+.final-cta{padding:5rem 1.75rem;text-align:center}
+.brand-signature{width:220px;height:106px;margin:0 auto 2rem;background:url('bflogo.png') center/390px 488px no-repeat}
+.final-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4.5vw,46px);font-weight:900;line-height:1.1;margin-bottom:2rem;max-width:700px;margin-left:auto;margin-right:auto}
+.final-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+
+footer{padding:2rem 1.75rem;display:flex;justify-content:space-between;align-items:center;border-top:.5px solid var(--rule);flex-wrap:wrap;gap:1rem}
+.ft-logo{font-family:'Playfair Display',serif;font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--muted)}
+.ft-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.ft-link{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}
+.ft-link:hover{color:var(--wht)}
+.ft-copy{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.08em}
+
+.reveal{opacity:1;transform:none}
+.js-reveal .reveal{opacity:0;transform:translateY(14px);transition:opacity .8s ease,transform .8s ease}
+.js-reveal .reveal.vis{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .hero{padding-top:9rem}.hero-inner,.pain-layout,.app-story,.faq-shell,.blog-grid,.evidence-grid,.two-way-grid,.audience-grid,.problem-grid,.flow,.profile-grid,.guide-grid,.journal-two,.learn-grid{grid-template-columns:1fr}
+  .phone-stage{min-height:500px}.float-card.top{right:0}.float-card.bottom{left:0}.faq-intro{position:static}.mini-screen:nth-child(2){margin-top:0}.blog-card,.blog-card:first-child{min-height:320px}
+  .way-card+.way-card{border-left:none;border-top:.5px solid var(--rule)}
+  .aud-card,.fc,.journal-col,.prob-cell,.guide-cell,.learn-cell,.pf-row{border-right:none!important}
+  .check-row{grid-template-columns:1fr}
+  .check-label{border-right:none;border-bottom:.5px solid var(--rule)}
+  .evidence-card{border-right:none;border-bottom:.5px solid var(--rule);min-height:0}.evidence-card:last-child{border-bottom:none}
+}
+@media(max-width:560px){.phone{width:235px;min-height:480px}.screen{min-height:428px}.float-card{transform:scale(.86)}.float-card.top{right:-18px}.float-card.bottom{left:-18px}.app-screens{grid-template-columns:1fr}.mini-screen{min-height:300px}}
+
+/* Accessibility refinements */
+.nav-toggle,.nav-close{min-width:44px;min-height:44px}
+.tag,.sec-n,.disclaimer,.ft-link,.ft-copy,.status-pill.planned,.cat-status,.pf-note,.pf-tag,.way-label,.hero-trust,.fn,.journal-label,.priv-val,.aud-body,.guide-body,.future-chip,.check-label,.flow-arrow,.h-arrow,.val-body{color:rgba(255,255,255,.62)}
+/* Premium floating navigation and generous rhythm */
+.sec{padding:7rem clamp(1.5rem,6vw,6rem)}
+.sec>*{max-width:1200px;margin-left:auto;margin-right:auto}
+.future-block{padding:6rem clamp(1.5rem,6vw,6rem)}
+.future-inner{max-width:1200px;margin:0 auto}
+@media(min-width:901px){nav{top:1rem;left:clamp(1rem,3vw,2.5rem);right:clamp(1rem,3vw,2.5rem);max-width:1280px;margin:0 auto;padding:.78rem .85rem .78rem 1.35rem;border:1px solid rgba(255,255,255,.13);border-radius:999px;background:rgba(10,10,10,.84);box-shadow:0 16px 48px rgba(0,0,0,.28)}.nav-link{letter-spacing:.12em}.nav-cta{padding:.78rem 1.35rem;border-radius:999px}}
+@media(max-width:900px){.nav-panel{visibility:hidden}.nav-panel.open{visibility:visible}.nav-link{min-height:44px;display:flex;align-items:center}.ft-link{min-height:44px;display:inline-flex;align-items:center}}
+@media(max-width:900px){nav{top:.75rem;left:.75rem;right:.75rem;padding:.7rem 1rem;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:rgba(10,10,10,.92)}.nav-panel{border-radius:0}.sec{padding:5rem 1.5rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
+/* Official BadgerFit logo */
+.nav-logo{display:block;width:80px;height:38px;flex:0 0 80px;background:url("apple-touch-icon.png") center/135px 135px no-repeat;font-size:0!important;letter-spacing:0!important;overflow:hidden}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo serif" aria-label="BadgerFit home">BadgerFit</a>
+  <button id="navToggle" class="nav-toggle mono" aria-expanded="false" aria-controls="navPanel" aria-label="Open navigation menu">Menu</button>
+  <div id="navPanel" class="nav-panel">
+    <button id="navClose" class="nav-close mono" aria-label="Close navigation menu">Close ✕</button>
+    <div class="nav-links">
+      <a href="badgerfit.html" class="nav-link mono">BadgerFit</a>
+      <a href="fit-check.html" class="nav-link mono">Fit Check</a>
+      <a href="how-it-works.html" class="nav-link mono">How It Works</a>
+      <a href="learn.html" class="nav-link mono">Learn</a>
+      <a href="research.html" class="nav-link mono">Research</a>
+      <a href="about.html" class="nav-link mono">About</a>
+    </div>
+    <a href="https://badger-eight.vercel.app/" class="nav-cta mono">Open BadgerFit</a>
+  </div>
+</nav>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="tag">BadgerFit by The Badger Co.</div>
+      <h1 class="hero-title serif">UNDERSTAND YOUR FEET.<br>CHOOSE BETTER FOR THEM.</h1>
+      <p class="hero-sub">Scan your foot or check one uncomfortable shoe. BadgerFit turns what you see and feel into practical footwear guidance.</p>
+      <div class="hero-ctas">
+        <a href="https://badger-eight.vercel.app/" class="btn mono">Open BadgerFit</a>
+        <a href="fit-check.html" class="btn ghost mono">Explore Fit Check</a>
+      </div>
+      <p class="hero-trust mono">For training, long hours on your feet and everyday commuting. <span class="hero-note">Educational guidance—not a medical diagnosis.</span></p>
+    </div>
+    <div class="phone-stage" aria-label="Illustrative preview of the BadgerFit scan interface">
+      <div class="float-card top"><div class="float-label">After a valid scan</div><div class="float-value">Fit profile</div><div class="float-note">Estimated length, width and sizing context.</div></div>
+      <div class="phone"><div class="screen"><div class="screen-kicker">Guided scan</div><div class="screen-title">Position your foot.</div><div class="scan-frame"><div class="foot-outline"></div></div><div class="screen-checks"><div class="screen-check"><span>A4 visible</span><b>Ready</b></div><div class="screen-check"><span>Foot position</span><b>Ready</b></div><div class="screen-check"><span>Lighting</span><b>Ready</b></div></div></div></div>
+      <div class="float-card bottom"><div class="float-label">No scan needed</div><div class="float-value">Fit Check</div><div class="float-note">Describe one shoe problem and get a plan.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PAIN POINTS -->
+<section class="sec reveal">
+  <div class="sec-hd">
+    <div><div class="tag" style="margin-bottom:.6rem">Built For People Who Deal With</div><h2 class="sec-title serif">When footwear does not feel right.</h2></div>
+  </div>
+  <div class="pain-layout">
+    <div class="foot-map" aria-label="Illustration showing common shoe discomfort areas">
+      <svg viewBox="0 0 300 470" role="img" aria-labelledby="painMapTitle"><title id="painMapTitle">Common footwear pressure and slipping areas</title>
+        <path d="M145 438 C88 430 70 370 74 302 C78 250 102 214 104 163 C105 118 82 80 98 47 C114 15 166 17 190 45 C215 74 206 121 196 161 C184 209 207 247 220 292 C240 361 215 432 145 438Z" fill="none" stroke="rgba(255,255,255,.62)" stroke-width="2"/>
+        <ellipse cx="105" cy="34" rx="18" ry="25" fill="none" stroke="rgba(255,255,255,.48)"/><ellipse cx="140" cy="22" rx="15" ry="20" fill="none" stroke="rgba(255,255,255,.42)"/><ellipse cx="170" cy="27" rx="13" ry="18" fill="none" stroke="rgba(255,255,255,.38)"/><ellipse cx="196" cy="39" rx="11" ry="15" fill="none" stroke="rgba(255,255,255,.34)"/>
+        <circle class="pain-dot" cx="145" cy="78" r="5"/><line class="pain-line" x1="150" y1="78" x2="270" y2="60"/><text class="pain-text" x="185" y="50">Toe pressure</text>
+        <circle class="pain-dot" cx="89" cy="220" r="5"/><line class="pain-line" x1="84" y1="220" x2="15" y2="198"/><text class="pain-text" x="3" y="187">Side pressure</text>
+        <circle class="pain-dot" cx="151" cy="410" r="5"/><line class="pain-line" x1="156" y1="410" x2="272" y2="394"/><text class="pain-text" x="184" y="383">Heel slip</text>
+      </svg>
+    </div>
+    <div class="problem-grid">
+      <div class="prob-cell">Toe pressure</div><div class="prob-cell">Heel slipping</div><div class="prob-cell">Side pressure</div><div class="prob-cell">End-of-day fatigue</div><div class="prob-cell">Inconsistent sizing</div><div class="prob-cell">Width uncertainty</div><div class="prob-cell">Post-activity discomfort</div><div class="prob-cell">Insole confusion</div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. EVIDENCE -->
+<section class="sec reveal">
+  <div class="sec-hd">
+    <div><div class="tag" style="margin-bottom:.6rem">Why Fit Deserves More Than One Number</div><h2 class="sec-title serif">Length is only part of the story.</h2></div>
+  </div>
+  <div class="evidence-grid">
+    <article class="evidence-card"><div class="evidence-number">1969</div><p>India's footwear sizing standard was based on European and French standards.</p><div class="evidence-source"><a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=1780053">DPIIT / PIB, 2021</a></div></article>
+    <article class="evidence-card"><div class="evidence-number">63–72%</div><p>Four studies in a review found footwear incorrectly fitted by length, width or both.</p><div class="evidence-source"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6064070/">Buldt &amp; Menz, 2018</a></div></article>
+    <article class="evidence-card"><div class="evidence-number">58%</div><p>The median share wearing shoes that were too narrow across studies reporting width-specific results.</p><div class="evidence-source"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6064070/">Peer-reviewed review</a></div></article>
+  </div>
+  <p class="disclaimer evidence-note">These external studies used different populations and fitting methods. They establish why fit deserves attention—not the accuracy or effectiveness of BadgerFit.</p>
+</section>
+
+<!-- 4. TWO WAYS -->
+<section class="sec reveal">
+  <div class="sec-hd">
+    <div><div class="tag" style="margin-bottom:.6rem">Choose Your Starting Point</div><h2 class="sec-title serif">Scan your foot—or check one shoe.</h2></div>
+  </div>
+  <div class="two-way-grid">
+    <div class="way-card">
+      <div><div class="way-title serif">Scan My Foot</div><p class="way-body">Use an A4 sheet and your phone camera to estimate foot measurements and sizing guidance.</p></div>
+      <div><div class="way-labels" style="margin-bottom:1.25rem"><span class="way-label mono">A4 paper</span><span class="way-label mono">Camera</span><span class="way-label mono">Account</span></div><a href="https://badger-eight.vercel.app/" class="btn mono">Start Scan</a></div>
+    </div>
+    <div class="way-card">
+      <div><div class="way-title serif">Check This Shoe</div><p class="way-body">Describe what feels wrong in one shoe and receive a practical, rule-based plan.</p></div>
+      <div><div class="way-labels" style="margin-bottom:1.25rem"><span class="way-label mono">No paper</span><span class="way-label mono">No scan</span><span class="way-label mono">Account</span></div><a href="fit-check.html" class="btn mono">Start Fit Check</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. HOW IT WORKS -->
+<section class="sec reveal">
+  <div class="sec-hd">
+    <div><div class="tag" style="margin-bottom:.6rem">How It Works</div><h2 class="sec-title serif">Start. Understand. Adjust.</h2></div>
+  </div>
+  <div class="flow process-flow">
+    <div class="fc"><div class="fn mono">STEP 01</div><div class="ft2 serif">Choose</div><p class="fs mono">Scan your foot or check one uncomfortable shoe.</p></div>
+    <div class="fc"><div class="fn mono">STEP 02</div><div class="ft2 serif">Understand</div><p class="fs mono">See estimated measurements or a plain-language fit assessment.</p></div>
+    <div class="fc"><div class="fn mono">STEP 03</div><div class="ft2 serif">Adjust</div><p class="fs mono">Try practical next steps, then reassess how the shoe feels.</p></div>
+  </div>
+  <p style="margin-top:1.25rem"><a href="how-it-works.html" class="mono" style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.62)">See how BadgerFit works →</a></p>
+</section>
+
+<!-- 5. WHAT YOU GET -->
+<section class="sec reveal" id="profile">
+  <div class="app-story">
+    <div class="app-screens" aria-label="Illustrative BadgerFit result screens">
+      <div class="mini-screen"><div class="screen-kicker">Your profile</div><h3>Understand the measurements.</h3><div class="metric"><span>Length</span><strong>Estimated after scan</strong></div><div class="metric"><span>Width</span><strong>Estimated after scan</strong></div><div class="metric"><span>Size</span><strong>UK / India guidance</strong></div></div>
+      <div class="mini-screen"><div class="screen-kicker">Fit Check</div><h3>Know what to try next.</h3><div class="fit-plan"><b>Try first</b><p>A practical, low-effort adjustment based on your answers.</p></div><div class="fit-plan"><b>Monitor</b><p>What to notice over the next few wears.</p></div></div>
+    </div>
+    <div>
+      <div class="tag" style="margin-bottom:.6rem">Inside The App</div><h2 class="sec-title serif">Your feet, explained in plain language.</h2>
+      <div class="story-list">
+        <div class="story-item"><span class="story-num">01</span><div><h3>Estimated profile</h3><p>Length, width and sizing context after a valid scan.</p></div></div>
+        <div class="story-item"><span class="story-num">02</span><div><h3>Shoe-specific plan</h3><p>What to try, avoid and monitor when one shoe feels wrong.</p></div></div>
+        <div class="story-item"><span class="story-num">03</span><div><h3>Relevant education</h3><p>Clear explanations of the footwear features that may matter.</p></div></div>
+      </div>
+      <p class="disclaimer" style="margin-top:1.5rem">Interface visuals are illustrative. Badger Cluster remains a beta grouping—not a diagnosis or validated manufacturing standard.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. FAQ -->
+<section class="sec reveal">
+  <div class="faq-shell">
+    <div class="faq-intro"><div class="tag" style="margin-bottom:.75rem">Frequently Asked Questions</div><h2 class="sec-title serif">Still deciding where to begin?</h2><p class="body-copy">Everything you need to know about scanning, Fit Check and your data—kept simple.</p></div>
+    <div class="faq-list">
+    <details class="faq-item"><summary>What is BadgerFit?</summary><div class="faq-answer">A foot-scan and shoe Fit Check tool that turns measurements or shoe-specific answers into practical, rule-based guidance.</div></details>
+    <details class="faq-item"><summary>Should I scan or use Fit Check?</summary><div class="faq-answer">Scan to build an estimated foot profile. Use Fit Check when one particular shoe feels uncomfortable and you want a focused plan.</div></details>
+    <details class="faq-item"><summary>What do I need for the scan?</summary><div class="faq-answer">One A4 sheet, a phone camera, suitable lighting and a BadgerFit account.</div></details>
+    <details class="faq-item"><summary>Is BadgerFit medical advice?</summary><div class="faq-answer">No. It provides educational fit and footwear guidance. Persistent, severe or unusual discomfort should be assessed by an appropriate healthcare professional.</div></details>
+    <details class="faq-item"><summary>What is a Badger Cluster?</summary><div class="faq-answer">A beta grouping based on available width and arch information. Its boundaries are still being evaluated.</div></details>
+    <details class="faq-item"><summary>How do recommendations work?</summary><div class="faq-answer">Rules connect your scan results or Fit Check answers to practical suggestions and relevant education. Some product links may be affiliate links and will be clearly identified.</div></details>
+    <details class="faq-item"><summary>Are scan images stored?</summary><div class="faq-answer">Successful scan images are processed temporarily and are not retained. Failed-scan diagnostic information is stored only with separate opt-in consent.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- 7. BLOGS -->
+<section class="sec reveal">
+  <div class="sec-hd"><div><div class="tag" style="margin-bottom:.6rem">Badger Research Library</div><h2 class="sec-title serif">Answers for the questions your feet keep asking.</h2></div></div>
+  <div class="blog-grid">
+    <a class="blog-card" href="blog-toe-box-pressure.html"><div><div class="blog-art"></div><span class="blog-type">Fit &amp; Toe Box</span><h3>Why do shoes feel tight around the toes?</h3><p>A direct guide to toe-box shape, width and what to check before sizing up.</p></div><span class="blog-link">Read guide →</span></a>
+    <a class="blog-card" href="blog-heel-slip.html"><div><span class="blog-type">Fit Check</span><h3>Why does my heel slip inside a shoe?</h3><p>Understand heel hold, shoe volume and why tighter lacing is not always the answer.</p></div><span class="blog-link">Read guide →</span></a>
+    <a class="blog-card" href="blog-measure-foot-width.html"><div><span class="blog-type">Measurements</span><h3>How do I measure foot width at home?</h3><p>A simple A4-paper method, plus the limits of measuring without a fitting.</p></div><span class="blog-link">Read guide →</span></a>
+  </div>
+  <p style="margin-top:2rem"><a href="learn.html" class="btn ghost mono">View All Guides</a></p>
+</section>
+
+<!-- 7. FUTURE FOOTWEAR -->
+<div class="future-block reveal">
+  <div class="future-inner">
+    <div class="tag" style="margin-bottom:.75rem">Long-Term Direction</div>
+    <h2 class="serif" style="font-size:clamp(22px,3.5vw,34px);font-weight:900;line-height:1.1;margin-bottom:1.25rem">BadgerFit now. Better footwear later.</h2>
+    <p class="body-copy">BadgerFit is the present product. With consent, validation and sufficient evidence, its insights may eventually inform Badger footwear.</p>
+    <p style="margin-top:1rem"><a href="about.html#future-footwear" class="mono" style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5)">Read more on the About page →</a></p>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<section class="final-cta reveal">
+  <div class="brand-signature" role="img" aria-label="BadgerFit"></div>
+  <div class="tag" style="margin-bottom:1rem">Start Here</div>
+  <h2 class="final-title serif">Start with what your feet are telling you.</h2>
+  <div class="final-ctas">
+    <a href="https://badger-eight.vercel.app/" class="btn mono">Start Free Foot Scan</a>
+    <a href="fit-check.html" class="btn ghost mono">Check a Shoe Problem</a>
+  </div>
+  <p class="disclaimer">Results are estimates and educational guidance, not medical advice.</p>
+</section>
+
+<footer>
+  <div class="ft-logo serif">The Badger Co.</div>
+  <div class="ft-links">
+    <a href="badgerfit.html" class="ft-link mono">BadgerFit</a>
+    <a href="fit-check.html" class="ft-link mono">Fit Check</a>
+    <a href="how-it-works.html" class="ft-link mono">How It Works</a>
+    <a href="learn.html" class="ft-link mono">Learn</a>
+    <a href="blogs.html" class="ft-link mono">Blogs</a>
+    <a href="research.html" class="ft-link mono">Research</a>
+    <a href="about.html" class="ft-link mono">About</a>
+  </div>
+  <div class="ft-copy mono">© 2026 The Badger Co.</div>
+</footer>
+
+<script>
+var toggle=document.getElementById('navToggle'),panel=document.getElementById('navPanel'),closeBtn=document.getElementById('navClose');
+function openMenu(){panel.classList.add('open');toggle.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';closeBtn.focus();}
+function closeMenu(){panel.classList.remove('open');toggle.setAttribute('aria-expanded','false');document.body.style.overflow='';toggle.focus();}
+toggle.addEventListener('click',function(){panel.classList.contains('open')?closeMenu():openMenu();});
+closeBtn.addEventListener('click',closeMenu);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('open'))closeMenu();});
+panel.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+document.body.classList.add('js-reveal');
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+}else{
+  document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('vis')});
+}
+document.addEventListener("keydown",function(e){if(e.key!=="Tab"||!panel.classList.contains("open"))return;var items=Array.from(panel.querySelectorAll("a,button")).filter(function(el){return el.getClientRects().length>0});if(!items.length)return;var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}});
+</script>
+</body>
+</html>

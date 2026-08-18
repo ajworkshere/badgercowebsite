@@ -213,7 +213,7 @@ body{padding-top:0}
 .future-chip{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;border:.5px solid var(--rule);padding:.4rem .8rem;color:rgba(255,255,255,.4)}
 
 .final-cta{padding:5rem 1.75rem;text-align:center}
-.brand-signature{width:220px;height:106px;margin:0 auto 2rem;background:url('bflogo.png') center/390px 488px no-repeat}
+.brand-signature{width:min(100%,460px);height:64px;margin:0 auto 2rem;background:url('bflogo.png') center/contain no-repeat;filter:invert(1)}
 .final-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4.5vw,46px);font-weight:900;line-height:1.1;margin-bottom:2rem;max-width:700px;margin-left:auto;margin-right:auto}
 .final-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
 
@@ -251,14 +251,14 @@ footer{padding:2rem 1.75rem;display:flex;justify-content:space-between;align-ite
 @media(max-width:900px){.nav-panel{visibility:hidden}.nav-panel.open{visibility:visible}.nav-link{min-height:44px;display:flex;align-items:center}.ft-link{min-height:44px;display:inline-flex;align-items:center}}
 @media(max-width:900px){nav{top:.75rem;left:.75rem;right:.75rem;padding:.7rem 1rem;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:rgba(10,10,10,.92)}.nav-panel{border-radius:0}.sec{padding:5rem 1.5rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
-/* Official BadgerFit logo */
-.nav-logo{display:block;width:80px;height:38px;flex:0 0 80px;background:url("apple-touch-icon.png") center/135px 135px no-repeat;font-size:0!important;letter-spacing:0!important;overflow:hidden}
+/* Official The Badger Co. logo */
+.nav-logo{display:block;width:150px;height:38px;flex:0 0 150px;background:url("bflogo.png") center/contain no-repeat;font-size:0!important;letter-spacing:0!important;overflow:hidden}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo serif" aria-label="BadgerFit home">BadgerFit</a>
+  <a href="index.html" class="nav-logo serif" aria-label="The Badger Co. home"><img src="bflogo.png" alt="The Badger Co."></a>
   <button id="navToggle" class="nav-toggle mono" aria-expanded="false" aria-controls="navPanel" aria-label="Open navigation menu">Menu</button>
   <div id="navPanel" class="nav-panel">
     <button id="navClose" class="nav-close mono" aria-label="Close navigation menu">Close ✕</button>
@@ -417,7 +417,7 @@ footer{padding:2rem 1.75rem;display:flex;justify-content:space-between;align-ite
 
 <!-- FINAL CTA -->
 <section class="final-cta reveal">
-  <div class="brand-signature" role="img" aria-label="BadgerFit"></div>
+  <div class="brand-signature" role="img" aria-label="The Badger Co."></div>
   <div class="tag" style="margin-bottom:1rem">Start Here</div>
   <h2 class="final-title serif">Start with what your feet are telling you.</h2>
   <div class="final-ctas">

@@ -1,0 +1,19 @@
+name: Check site links
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  internal-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+      - name: Validate internal links and anchors
+        run: node scripts/check-internal-links.mjs
